@@ -15,7 +15,7 @@ boost::filesystem::path nano::working_path (bool legacy)
 		case nano::nano_networks::nano_dev_network:
 			if (!legacy)
 			{
-				result /= "NanoDev";
+				result /= "btcoDataDev";
 			}
 			else
 			{
@@ -25,7 +25,7 @@ boost::filesystem::path nano::working_path (bool legacy)
 		case nano::nano_networks::nano_beta_network:
 			if (!legacy)
 			{
-				result /= "NanoBeta";
+				result /= "btcoDataBeta";
 			}
 			else
 			{
@@ -35,7 +35,7 @@ boost::filesystem::path nano::working_path (bool legacy)
 		case nano::nano_networks::nano_live_network:
 			if (!legacy)
 			{
-				result /= "Nano";
+				result /= "btcoData";
 			}
 			else
 			{
@@ -45,7 +45,7 @@ boost::filesystem::path nano::working_path (bool legacy)
 		case nano::nano_networks::nano_test_network:
 			if (!legacy)
 			{
-				result /= "NanoTest";
+				result /= "btcoDataTest";
 			}
 			else
 			{

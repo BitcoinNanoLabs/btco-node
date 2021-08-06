@@ -33,7 +33,7 @@ void show_error (std::string const & message_a)
 }
 void show_help (std::string const & message_a)
 {
-	QMessageBox message (QMessageBox::NoIcon, "Help", "see <a href=\"https://docs.nano.org/commands/command-line-interface/#launch-options\">launch options</a> ");
+	QMessageBox message (QMessageBox::NoIcon, "Help", "see <a href=\"https://docs.bitcoinnano.org/commands/command-line-interface/#launch-options\">launch options</a> ");
 	message.setStyleSheet ("QLabel {min-width: 450px}");
 	message.setDetailedText (message_a.c_str ());
 	message.show ();

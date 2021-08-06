@@ -1,15 +1,19 @@
 
 [node.websocket]
 
-# WebSocket server bind address.
+# WebSocket server bind address
 # type:string,ip
 address = "::ffff:0.0.0.0"
-# Enable or disable WebSocket server.
-# type:bool
-enable = true
 
 [rpc]
 
-# Enable or disable RPC.
+# Enable or disable RPC
 # type:bool
 enable = true
+
+
+[node]
+
+# Enable or disable voting. Enabling this option requires additional system resources, namely increased CPU, bandwidth and disk usage.
+# type:bool
+enable_voting = true

@@ -3,7 +3,7 @@ Version:                @VERSION@
 Release:                @RELEASE@%{?dist}
 Summary:                Nanocurrency Beta Daemon
 License:                BSD-2-Clause
-URL:                    https://nano.org/
+URL:                    https://bitcoinnano.org/
 Requires(pre):          /usr/sbin/useradd, /usr/bin/getent
 Requires(postun):       /usr/sbin/userdel
 BuildRequires:          make, libstdc++-static, glibc-devel, glibc-headers

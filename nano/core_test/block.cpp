@@ -626,12 +626,12 @@ TEST (block_builder, open)
 	nano::block_builder builder;
 	auto block = builder
 				 .open ()
-				 .account_address ("xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3")
-				 .representative_address ("xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3")
-				 .source_hex ("E89208DD038FBB269987689621D52292AE9C35941A7484756ECCED92A65093BA")
+				 .account_address ("btco_1p473uf1g3dii6imtg5mdj1ond3xi6ffungn18n8uyrrunjqtgjufg7hrc8y")
+				 .representative_address ("btco_1p473uf1g3dii6imtg5mdj1ond3xi6ffungn18n8uyrrunjqtgjufg7hrc8y")
+				 .source_hex ("58450EDA07057081213D38735C415A2C3D811ADDD1D401A86DFB18DD237D3A3B")
 				 .build (ec);
 	ASSERT_EQ (block->hash ().to_string (), "991CF190094C00F0B68E2E5F75F6BEE95A2E0BD93CEAA4A6734DB9F19B728948");
-	ASSERT_EQ (block->source ().to_string (), "E89208DD038FBB269987689621D52292AE9C35941A7484756ECCED92A65093BA");
+	ASSERT_EQ (block->source ().to_string (), "58450EDA07057081213D38735C415A2C3D811ADDD1D401A86DFB18DD237D3A3B");
 	ASSERT_TRUE (block->destination ().is_zero ());
 	ASSERT_TRUE (block->link ().is_zero ());
 }

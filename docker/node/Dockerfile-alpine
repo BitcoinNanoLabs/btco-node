@@ -6,8 +6,8 @@ ARG CI_BUILD=OFF
 ADD ./ /tmp/src
 
 
-RUN echo "" > /tmp/src/rep_weights_live.bin && \
-    echo "" > /tmp/src/rep_weights_beta.bin 
+#RUN echo "" > /tmp/src/rep_weights_live.bin && \
+#   echo "" > /tmp/src/rep_weights_beta.bin 
 
 # Build nano_node
 RUN mkdir /tmp/build && \

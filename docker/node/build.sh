@@ -57,5 +57,5 @@ esac
 REPO_ROOT=`git rev-parse --show-toplevel`
 COMMIT_SHA=`git rev-parse --short HEAD`
 pushd $REPO_ROOT
-docker build --no-cache --build-arg NETWORK="${network}" -f docker/node/${docker_file} -t bitcoinnanolabs/btco${network_tag}:latest .
+docker buildx build --platform linux/amd64,linux/arm64 --no-cache --build-arg NETWORK="${network}" -f docker/node/${docker_file} -t bitcoinnanolabs/btco${network_tag}:latest --push .
 popd

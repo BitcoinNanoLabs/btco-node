@@ -1,7 +1,7 @@
 #!/bin/bash
 
 base='ubuntu'
-tag_name='bitcoinnano/btco-build:latest'
+tag_name='bitcoinnanolabs/btco-build:latest'
 docker_file='Dockerfile.build'
 
 print_usage() {
@@ -28,7 +28,7 @@ case "${base}" in
 	ubuntu)
 		;;
 	alpine)
-        tag_name='bitcoinnano/btco-build:latest-alpine'
+        tag_name='bitcoinnanolabs/btco-build:latest'
         docker_file='Dockerfile.build-alpine'
 		;;
 	*)
@@ -39,5 +39,5 @@ esac
 
 REPO_ROOT=`git rev-parse --show-toplevel`
 pushd $REPO_ROOT
-docker build -f docker/build/$docker_file -t $tag_name .
+docker buildx build --platform linux/amd64,linux/arm64 --no-cache -f docker/build/$docker_file -t $tag_name --push .
 popd

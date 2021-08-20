@@ -1,4 +1,4 @@
-FROM bitcoinnanolabs/btco-build:latest-alpine
+FROM bitcoinnanolabs/btco-build:latest
 
 ARG NETWORK=live
 ARG TRAVIS_TAG=DEV_BUILD

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 network='live'
-base='ubuntu'
-alpine_tag=''
+base='x86'
+arm_tag=''
 docker_file='Dockerfile'
 
 print_usage() {
-	echo 'build.sh [-h] [-n {live|beta|test}] [-b {ubuntu|alpine}]'
+	echo 'build.sh [-h] [-n {live|beta|test}] [-b {x86|arm}]'
 }
 
 while getopts 'hn:b:' OPT; do
@@ -42,11 +42,11 @@ case "${network}" in
 esac
 
 case "${base}" in
-	ubuntu)
+	x86)
 		;;
-	alpine)
-		alpine_tag="-alpine"
-		docker_file="Dockerfile-alpine"	
+	arm)
+		arm_tag="-arm"
+		docker_file="Dockerfile-arm"	
 		;;
 	*)
 		echo "Invalid base: ${base}" >&2
@@ -57,5 +57,5 @@ esac
 REPO_ROOT=`git rev-parse --show-toplevel`
 COMMIT_SHA=`git rev-parse --short HEAD`
 pushd $REPO_ROOT
-docker buildx build --platform linux/amd64,linux/arm64 --no-cache --build-arg NETWORK="${network}" -f docker/node/${docker_file} -t bitcoinnanolabs/btco${network_tag}:latest --push .
+docker build --no-cache --build-arg NETWORK="${network}" -f docker/node/${docker_file} -t bitcoinnanolabs/btco${network_tag}:latest${arm_tag}  .
 popd

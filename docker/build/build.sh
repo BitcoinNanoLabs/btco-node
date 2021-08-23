@@ -1,11 +1,11 @@
 #!/bin/bash
 
-base='ubuntu'
+base='x86'
 tag_name='bitcoinnanolabs/btco-build:latest'
 docker_file='Dockerfile.build'
 
 print_usage() {
-	echo 'build.sh [-h] [-b {ubuntu|alpine}]'
+	echo 'build.sh [-h] [-b {x86|arm}]'
 }
 
 while getopts 'hb:' OPT; do
@@ -25,11 +25,11 @@ while getopts 'hb:' OPT; do
 done
 
 case "${base}" in
-	ubuntu)
+	x86)
 		;;
-	alpine)
-        tag_name='bitcoinnanolabs/btco-build:latest'
-        docker_file='Dockerfile.build-alpine'
+	arm)
+        tag_name='bitcoinnanolabs/btco-build:arm'
+        docker_file='Dockerfile.build-arm'
 		;;
 	*)
 		echo "Invalid base: ${base}" >&2
@@ -39,5 +39,5 @@ esac
 
 REPO_ROOT=`git rev-parse --show-toplevel`
 pushd $REPO_ROOT
-docker buildx build --platform linux/amd64,linux/arm64 --no-cache -f docker/build/$docker_file -t $tag_name --push .
+docker build --no-cache -f docker/build/$docker_file -t $tag_name .
 popd

@@ -1,0 +1,111 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build and push btcobuild
+        uses: docker/build-push-action@v3
+        with:
+          file: ./docker/build/Dockerfile.build
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: bitcoinnanolabs/btco-build:latest
+
+      -
+        name: Build and push btco node live
+        uses: docker/build-push-action@v3
+        with:
+          file: ./docker/node/Dockerfile.live
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: bitcoinnanolabs/btco:latest
+
+      # -
+      #   name: Build and push btco node test
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     file: ./docker/node/Dockerfile.test
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: bitcoinnanolabs/btco:test
+      
+      # -
+      #   name: Build and push btco node beta
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     file: ./docker/node/Dockerfile.beta
+      #     platforms: linux/amd64
+      #     push: true
+      #     tags: bitcoinnanolabs/btco:beta
+      
+      
+      # -
+      #   name: Deploy Stack
+      #   uses: LGinC/portainer-stack-deploy@master
+      #   with:
+      #     serverurl: ${{ secrets.PORTAINER_URL }}
+      #     access_token:  ${{ secrets.PORTAINER_TOKEN }}
+      #     endpointId: 2
+      #     stackname: btco-backend
+      #     imagenames: |
+      #         bitcoinnanolabs/btco-mp-strapi:${{ secrets.NODE_ENV }}
+      #         rabbitmq:3.8-management-alpine
+      #         bitcoinnanolabs/mail-sender
+      #     env: |
+      #         CLOUDINARY_NAME=${{ secrets.CLOUDINARY_NAME }}
+      #         CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}
+      #         CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}
+      #         JWT_SECRET=${{ secrets.JWT_SECRET }}
+      #         APP_KEYS=${{ secrets.APP_KEYS }}
+      #         ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}
+      #         API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}
+      #         MP_ACCESS_TOKEN=${{ secrets.MP_ACCESS_TOKEN }}
+      #         AMQP_USER=${{ secrets.AMQP_USER }}
+      #         AMQP_PASSWORD=${{ secrets.AMQP_PASSWORD }}
+      #         DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+      #         DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+      #         DATABASE_NAME=${{ secrets.DATABASE_NAME }}
+      #         DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
+      #         DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+      #         PAYMENT_CONFIRMATION_URL=${{ secrets.PAYMENT_CONFIRMATION_URL }}
+      #         GIT_USER=${{ secrets.GIT_USER }}
+      #         GIT_TOKEN=${{ secrets.GIT_TOKEN }}
+      #         NODE_ENV=${{ secrets.NODE_ENV }}
+      #         AMQ_QUEUE=${{ secrets.AMQ_QUEUE }} 
+      #         MAIL_FROM=${{ secrets.MAIL_FROM }}
+      #         DLQ_EXCHANGE=${{ secrets.DLQ_EXCHANGE }}
+      #         AWS_CREDENTIAL_PROFILES_FILE=${{ secrets.AWS_CREDENTIAL_PROFILES_FILE }}
+      #         AWS_REGION=${{ secrets.AWS_REGION }}
+      #         NEXT_PUBLIC_NANO_RPC_URL=${{ secrets.NEXT_PUBLIC_NANO_RPC_URL }}
+      #         NEXT_PUBLIC_REPRESENTATIVE_ADDRESS=${{ secrets.NEXT_PUBLIC_REPRESENTATIVE_ADDRESS }}
+      #         NEXT_PUBLIC_ORIGIN_SEED=${{ secrets.NEXT_PUBLIC_ORIGIN_SEED }}
+      #         NEXT_PUBLIC_ORIGIN_ADDRESS=${{ secrets.NEXT_PUBLIC_ORIGIN_ADDRESS }}
+      #         CURRCONV_API_KEY=${{ secrets.CURRCONV_API_KEY }}
+      #     docker_compose_path: ./deploy.yml
+      
+      
+      
+
+     

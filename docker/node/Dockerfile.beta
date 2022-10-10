@@ -1,6 +1,6 @@
-FROM bitcoinnanolabs/btco-build:arm
+FROM bitcoinnanolabs/btco-build:latest
 
-ARG NETWORK=live
+ARG NETWORK=beta
 ARG TRAVIS_TAG=DEV_BUILD
 ARG CI_BUILD=OFF
 ADD ./ /tmp/src
@@ -22,7 +22,7 @@ RUN mkdir /tmp/build && \
     echo ${NETWORK} > /etc/nano-network
 
 # Copy binaries to alpine base
-FROM arm64v8/alpine:3.11.6
+FROM alpine:3.11.6
 
 # Curl is useful to run monitoring from inside the container
 RUN apk --no-cache add curl
@@ -40,5 +40,3 @@ USER root
 
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["/usr/bin/entry.sh nano_node daemon -l"]
-
-

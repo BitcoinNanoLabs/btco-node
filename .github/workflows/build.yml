@@ -24,14 +24,14 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Build and push btcobuild
-        uses: docker/build-push-action@v3
-        with:
-          file: ./docker/build/Dockerfile.build
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: bitcoinnanolabs/btco-build:latest
+      # -
+      #   name: Build and push btcobuild
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     file: ./docker/build/Dockerfile.build
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: bitcoinnanolabs/btco-build:latest
 
       -
         name: Build and push btco node live
